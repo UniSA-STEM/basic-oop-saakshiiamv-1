@@ -78,6 +78,7 @@ class Rig:
 
     # generates 1 random asset at a time
 
+    @property
     def generate_asset(self):
         asset_types = [
             ("CryptoToken", "A digital currency that acquires or repairs rig"),
@@ -91,7 +92,7 @@ class Rig:
         new_asset = Asset(name, description)
 
         # if there is space available adds to storage
-        if self.storage(new_asset):
+        if self.store_asset(new_asset):
             print(f"{self.name} generated: {new_asset}")
 
         else:
@@ -99,3 +100,25 @@ class Rig:
 
         return new_asset
 
+    def rig_condition(self):
+
+    # stores asset into rig storage
+    def store_asset(self, asset):
+
+        # if assets are encrypted cannot store
+        if asset.is_encrypted:
+            print(f"{asset.name} is encrypted, therefore cannot be stored.")
+            return False
+
+        # calculate maximum storage capacity
+        # then checks if storage is full
+        max_storage = 3 + self.upgrade_level * 2
+
+        if len(self.storage) >= max_storage:
+            print(f"{self.name} storage full, can't store asset: {asset.name}".)
+            return False
+
+        # adding to storage list
+        self.storage.append(asset)
+        print(f"{asset.name} stored in {self.name}.")
+        return True
