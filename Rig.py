@@ -7,7 +7,10 @@ ID: <student_id>
 Username: ambss001
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+from typing import assert_type
+
 from Asset import Asset
+import random
 
 class Rig:
     def __init__(self, name):
@@ -73,6 +76,26 @@ class Rig:
             print("Can't upgrade, requires a hardware patch.")
             return False
 
+    # generates 1 random asset at a time
 
+    def generate_asset(self):
+        asset_types = [
+            ("CryptoToken", "A digital currency that acquires or repairs rig"),
+            ("Data Spike", "Hacking tool used in battles"),
+            ("Removable Drive", "Extraction device found in rigs"),
+            ("Security Chip", "Encryption and decryption tool for assets"),
+            ("Hardware Patch", "Component to upgrade rigs")
+        ]
 
+        name, description = random.choice(asset_types)
+        new_asset = Asset(name, description)
+
+        # if there is space available adds to storage
+        if self.storage(new_asset):
+            print(f"{self.name} generated: {new_asset}")
+
+        else:
+            print(f"{self.name} generated {new_asset}, however storage full.")
+
+        return new_asset
 
