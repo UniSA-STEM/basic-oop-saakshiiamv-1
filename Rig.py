@@ -7,6 +7,7 @@ ID: <student_id>
 Username: ambss001
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+from Asset import Asset
 
 class Rig:
     def __init__(self, name):
@@ -15,3 +16,34 @@ class Rig:
         self.broken_state = False # is the rig functioning?
         self.storage = [] # storage for assets
         self.upgrade_level = 0
+
+    # every rig starts with a starting asset of
+
+    # todo
+    # append asset from storage
+
+    # takes damage from data spikes attack and increases the damage counter
+    # if the damage threshold is reached the rig breaks.
+
+    def take_hits(self):
+        if self.broken_state:
+            print(f"{self.name} is already broken.")
+            return
+
+        # increase damage count from level 0 to 1
+        # rig breaks at level 2 damage
+        self.damage_count += 1
+
+        damage_threshold = max(2 - self.upgrade_level, 1)
+
+        print(f"{self.name} took a hit! \n Damage: {self.damage_count}/{damage_threshold}")
+
+        # checking if rig breaks
+        if self.damage_count >= damage_threshold:
+
+            # change default
+            self.broken_state = True
+            print(f"{self.name} is broken.")
+
+
+
