@@ -62,7 +62,17 @@ class Rig:
             print("Requires cryptoToken for repair")
             return False
 
+    # upgrades rig using a hardware patch
     def upgrade(self, hardware_patch):
+        if hardware_patch.name == "Hardware Patch":
+            self.upgrade_level += 1
+            print(f"{self.name} upgraded to level {self.upgrade_level}.")
+            return True
+
+        else:
+            print("Can't upgrade, requires a hardware patch.")
+            return False
+
 
 
 
