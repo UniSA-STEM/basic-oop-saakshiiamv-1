@@ -127,3 +127,5 @@ class Rig:
         self.storage.append(asset)
         print(f"{asset.name} stored in {self.name}.")
         return True
+
+    def release_asset(self, asset_name):
