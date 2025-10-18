@@ -45,5 +45,24 @@ class Rig:
             self.broken_state = True
             print(f"{self.name} is broken.")
 
+    # repairs the rig using a cryptoToken
+
+    def repair(self, crypto_token):
+        if not self.broken_state:
+            print(f"{self.name} repair not required, rig is still functional.")
+            return False
+
+        if crypto_token.name == "cryptoToken":
+            self.damage_count = 0
+            self.broken_state = False
+            print(f"{self.name} is repaired!!")
+            return True
+
+        else:
+            print("Requires cryptoToken for repair")
+            return False
+
+    def upgrade(self, hardware_patch):
+
 
 
