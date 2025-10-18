@@ -78,7 +78,6 @@ class Rig:
 
     # generates 1 random asset at a time
 
-    @property
     def generate_asset(self):
         asset_types = [
             ("CryptoToken", "A digital currency that acquires or repairs rig"),
@@ -100,7 +99,13 @@ class Rig:
 
         return new_asset
 
+    # get a description of rig's current condition
     def rig_condition(self):
+        if self.broken_state:
+            return f"Broken - level {self.upgrade_level}."
+
+        else:
+            return f"Pristine - level {self.upgrade_level}."
 
     # stores asset into rig storage
     def store_asset(self, asset):
