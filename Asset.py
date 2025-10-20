@@ -12,7 +12,7 @@ class Asset:
     def __init__(self, name, description):
         self.name = name
         self.description = description
-        self.is_encrypted =  # assests default start: unencrypted - boolean
+        self.is_encrypted = False # assets default start: unencrypted - boolean
 
     def __str__(self):
         if self.is_encrypted is True:

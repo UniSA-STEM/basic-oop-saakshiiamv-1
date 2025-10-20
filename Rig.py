@@ -128,6 +128,8 @@ class Rig:
         print(f"{asset.name} stored in {self.name}.")
         return True
 
+    # releases a specific asset from the storage to the inventory
+    # or returns none if it is encrypted or not found
     def release_asset(self, asset_name):
         for i, asset in enumerate(self.storage):
             if asset.name == asset_name and not asset.encrypted:
