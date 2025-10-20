@@ -144,4 +144,12 @@ class Rig:
         return None
 
     def __str__(self):
-        pass
+        condition = self.rigs_condition()
+
+        return (f"------------{self.name}------------\n"
+                f"condition:        {condition}\n"
+                f"Level:            {self.upgrade_level}\n"
+                f"Stored Assets:    {','.join(asset.name for asset in self.storage) if self.storage
+                else 'empty'}\n"
+                f"Storage:          {len(self.storage)}/{max_storage}\n"
+                f"Damage:           {self.damage}/2")
