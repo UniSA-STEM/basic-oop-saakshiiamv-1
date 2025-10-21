@@ -131,11 +131,59 @@ class Hacker:
         print(f"{extract_count} unencrypted assets successfully extracted from {target.name}")
         return extract_count > 0
 
+    # method to encrypt a target asset using a security chip from a specific location.
     def encrypt_asset(self, asset, location):
-        pass
 
+        # checking if the target asset is already encrypted
+        if asset.encrypted:
+            print(f"{asset.name} is already encrypted.")
+            return False
+
+        # searches for security chip in a specified location
+        # conditions: chip must exist and not be encrypted
+        security_chip = None
+        search_location = self.inventory if location == "inventory" else self.rig.storage
+        for item in search_location:
+            if item.name == "Security Chip" and not item.encrypted:
+                security_chip = item
+
+        # security chip found if not returns False
+        if not security_chip:
+            print(f"There is no security chip in the {location}.")
+            return False
+
+        # apply encryption to the target asset
+        search_location.remove(security_chip)
+        asset.encrypted = True
+        print(f"{asset.name} successfully encrypted.")
+        return True
+
+    # decryption method
     def decrypt_asset(self, asset, location):
-        pass
+
+        # checking that the target asset is not encrypted
+        if not asset.encrypted:
+            print(f"{asset.name} is not encrypted.")
+            return False
+
+        # searches for security chip in a specified location
+        # conditions: chip must exist and not be encrypted
+        security_chip = None
+        search_location = self.inventory if location == "inventory" else self.rig.storage
+        for item in search_location:
+            if item.name == "Security Chip" and not item.encrypted:
+                security_chip = item
+
+        # security chip found if not returns False
+        if not security_chip:
+            print(f"There is no security chip in the {location}.")
+            return False
+
+        # apply encryption to the target asset
+        search_location.remove(security_chip)
+        asset.encrypted = True
+        print(f"{asset.name} successfully encrypted.")
+        return True
 
     def upgrade_rig(self):
         pass
