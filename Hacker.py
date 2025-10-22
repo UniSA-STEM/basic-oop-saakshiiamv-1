@@ -185,14 +185,122 @@ class Hacker:
         print(f"{asset.name} successfully encrypted.")
         return True
 
+    # update a hacker's rig using a hardware patch
     def upgrade_rig(self):
-        pass
 
+        # checks if the hacker has a rig to even upgrade
+        if not self.rig:
+            print(f"Can't update if {self.name} has no rig.")
+            return False
+
+        # searches inventory for hardware patch
+        hardware_patch = None
+        for asset in self.inventory:
+            if asset.name == "Hardware Patch" and not asset.encrypted:
+                hardware_patch = asset
+
+        # hardware patch found if not returns False
+        if not hardware_patch:
+            print(f"Inventory has no hardware patch.")
+            return False
+
+        self.inventory.remove(hardware_patch)
+
+        # increases the rig's upgrade level with this call
+        upgraded = self.rig.upgrade(hardware_patch)
+        return upgraded
+
+    # method to store assets in the inventory and rig's storage.
     def store_asset(self, asset_name):
-        pass
+        # checks if the hacker has a rig to even upgrade
+        if not self.rig:
+            print(f"Can't update if {self.name} has no rig.")
+            return False
 
+        #
+        if asset_name:
+            asset_storing = None
+            for asset in self.inventory:
+                if asset.name == asset_name and not asset.encrypted:
+                    asset_storing = asset
+
+            if asset_storing:
+                if self.rig.store_asset(asset_storing):
+                    self.inventory.remove(asset_storing)
+                    print(f"{asset_name} successfully stored to {self.rig.name}.")
+                    return True
+
+            else:
+                print(f"{asset_name} was not found in the inventory or is not encrypted.")
+                return False
+
+        else:
+            # tracks number of successfully stored unencrypted assets
+            store_count = 0
+
+            # iterate through original list using [:]
+            # only extracts assets that are not encrypted and removes them from the storage
+            for asset in self.inventory[:]:
+                if not asset.encrypted:
+
+                    # transfers assets to the hacker's rig storage
+                    if self.rig.store_asset(asset):
+                        self.inventory.remove(asset)
+                    target.storage.remove(asset)
+
+                    store_count += 1
+
+            print(f"{store_count} unencrypted assets successfully stored to {self.rig.name}")
+            return store_count > 0
+
+    # method to retrieve assets from rig storage to hacker's inventory.
     def retrieve_asset(self, asset_name):
-        pass
+        # checks if the hacker has a rig to even upgrade
+        if not self.rig:
+            print(f"{self.name} has no rig.")
+            return False
 
+        # retrieve specific asset from rig storage, use the rig's release method to extract the asset
+        if asset_name:
+            to_retrieve = self.rig.release(asset_name)
+
+            # if successfully retrieve, adds the retrieved asset to the hacker's inventory
+            if to_retrieve:
+                self.inventory.append(to_retrieve)
+                print(f"{asset_name} retrieved from {self.rig.name}.")
+                return True
+            return False
+
+        else:
+            # tracks number of successfully retrieved assets
+            retrieve_count = 0
+
+            # iterate through original list using [:]
+            # only extracts assets that are not encrypte
+            for asset in self.rig.storage[:]:
+                if not asset.encrypted:
+
+                    # release the assets from the rig storage
+                    release_asset = self.rig.release(asset.name)
+
+                    # add released asset to inventory and increment counter
+                    if release_asset:
+                        self.inventory.append(release_asset)
+                        retrieve_count += 1
+
+            print(f"{retrieve_count} assets retrieved from {self.rig.name}.")
+            return retrieve_count > 0
+
+    # scan hacker's inventory for a specific asset
     def scan_inventory(self, asset_name):
-        pass
+
+        # searching for asset in inventory to remove it
+        for i, asset in enumerate(self.inventory):
+            if asset.name == asset_name and not asset.encrypted:
+                asset_found = self.inventory.pop(i)
+                print(f"{asset_name} asset found and removed.")
+                return asset_found
+
+        print(f"{asset_name} asset not found or is encrypted in inventory.")
+        return None
+
