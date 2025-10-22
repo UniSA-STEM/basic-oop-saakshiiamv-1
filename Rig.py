@@ -147,6 +147,7 @@ class Rig:
 
     def __str__(self):
         condition = self.rigs_condition()
+        max_storage = 3 + self.upgrade_level * 2
 
         return (f"------------{self.name}------------\n"
                 f"condition:        {condition}\n"

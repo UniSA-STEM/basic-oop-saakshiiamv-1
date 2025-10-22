@@ -304,3 +304,14 @@ class Hacker:
         print(f"{asset_name} asset not found or is encrypted in inventory.")
         return None
 
+    def __str__(self):
+        if self.rig:
+            info = f"{self.rig.name} | Level: {self.rig.upgrade} | Damage: {self.rig.damage}/2"
+        else:
+            info = "None"
+
+        return (f"------------{self.name}------------\n"
+                f"Rig:           {info}\n"
+                f"Trace Level:   {self.trace_level}/{self.trace_threshold}\n"
+                f"Inventory:     {','.join(asset.name for asset in self.inventory)
+                if self.inventory else "empty"}\n")
