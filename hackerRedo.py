@@ -23,8 +23,7 @@ class Hacker:
 
     # acquire rig with a CryptoToken, either using an existing one or creating a new rig
     # returns a true or false boolean output
-    def acquire_rig(self, rig):
-        self.rig = None
+    def acquire_rig(self, rig=None):
 
         # checking if rig already has a CryptoToken
         if self.rig:
@@ -45,7 +44,6 @@ class Hacker:
 
         if rig:
             self.rig = rig
-
         else:
             self.rig = Rig(f"Rig belongs to {self.name}.")
 
