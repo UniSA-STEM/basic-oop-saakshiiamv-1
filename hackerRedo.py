@@ -33,7 +33,7 @@ class Hacker:
         # now finds cryptoToken in inventory, removes it and acquires a rig successfully
         crypto_token = None
         for asset in self.inventory:
-            if asset.name == "CryptoToken" and not asset.encrypted:
+            if asset.name == "CryptoToken" and not asset.is_encrypted:
                 crypto_token = asset
 
         if not crypto_token:
