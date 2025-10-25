@@ -33,11 +33,11 @@ print(f"Starter Inventory: {[asset.name for asset in hacker.inventory]}")
 acquisition_res = hacker.acquire_rig()
 print(f"\n      Rig Acquisition Success: {acquisition_res}")
 if hacker.rig:
-    print(f"    Rig Name: {hacker.rig.name}")
-    print(f"    Inventory after Acquisition:"
-          f"    {[asset.name for asset in hacker.inventory]}")
+    print(f"      Rig Name: {hacker.rig.name}")
+    print(f"      Inventory after Acquisition:"
+          f" {[asset.name for asset in hacker.inventory]}")
 
-print("PHASE 1 TESTS COMPLETED: Testing base class creations")
+print("\nPHASE 1 TESTS COMPLETED: Testing base class creations")
 
 
 
