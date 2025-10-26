@@ -21,14 +21,14 @@ data_spike = Asset("Data Spike", "Hacking tool used in battles")
 print(f"Successfully Created Assets \n    {crypto} \n    {data_spike}")
 
 # test rig class creation with starting assets
-print("\n1.1 Testing Rig Class:")
+print("\ntest 1.1: Testing Rig Class")
 rig = Rig("testerRig1")
 print(f"Successfully Created Rig: {rig.name}")
 print(f"Starter Assets: {[asset.name for asset in rig.storage]}")
 print(f"Condition: {rig.rig_condition()}")
 
 # hacker creation and rig acquisition
-print("\n1.2 Hacker Class and Rig Acquisition:")
+print("\ntest 1.2: Hacker Class and Rig Acquisition")
 hacker = Hacker("Cyberhacker")
 print(f"Hacker: {hacker.name}")
 print(f"Starter Inventory: {[asset.name for asset in hacker.inventory]}")
@@ -100,10 +100,44 @@ def test_asset_extraction():
     print(f"- Victim Assets after: {[a.name for a in victim.rig.storage]}")
     print(f"- Extractor Assets after: {[a.name for a in extractor.rig.storage]}")
 
-    print("PHASE 3 COMPLETED: Extracting Assets System")
+    print("\nPHASE 3 COMPLETED: Extracting Assets System")
+    print("\n"+"="*85)
+
+def test_encrypt_decrypt():
+    print("PHASE 4: Encryption & Decryption")
+    print("=" * 85)
+
+    crypto_pro = Hacker("Crypto Professional")
+    crypto_pro.acquire_rig()
+
+    secret_file = Asset("Shhh SecretFile", "Confidential data")
+    crypto_pro.inventory.append(secret_file)
+
+    # adding chips to inventory
+    security_chip1 = Asset("Security Chip", "Encryption and decryption tool for assets")
+    security_chip2 = Asset("Security Chip", "Encryption and decryption tool for assets")
+    crypto_pro.inventory.extend([security_chip1, security_chip2])
+
+    print("\ntest 4.1: Pre-encryption")
+    print(f"Asset: {secret_file}")
+    print(f"Security Chips: {sum(1 for a in crypto_pro.inventory if a.name == "Security Chip")}")
+
+    encrypt_res = crypto_pro.encrypt_asset(secret_file, "inventory")
+    print(f"\ntest 4.2: Encryption Result - {"Success" if encrypt_res else "Failed"}")
+    print(f"- Assets after: {secret_file}")
+    print(f"- Remaining Security Chips: {sum(1 for a in crypto_pro.inventory if a.name == "Security Chip")}")
+
+    decrypt_res = crypto_pro.decrypt_asset(secret_file, "inventory")
+    print(f"\ntest 4.3: Decryption Test - {"Success" if decrypt_res else "Failed"}")
+    print(f"- Assets after: {secret_file}")
+
+    print("\nPHASE 4 TESTS COMPLETED: Encryption & Decryption")
+    print("\n"+"="*85)
+
 
 test_combat_trace_system()
 test_asset_extraction()
+test_encrypt_decrypt()
 
 
 

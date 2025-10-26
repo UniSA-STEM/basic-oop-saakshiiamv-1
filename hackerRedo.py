@@ -179,8 +179,8 @@ class Hacker:
 
         # apply encryption to the target asset
         search_location.remove(security_chip)
-        asset.is_encrypted = True
-        print(f"{asset.name} successfully encrypted.")
+        asset.is_encrypted = False
+        print(f"{asset.name} successfully decrypted.")
         return True
 
     # update a hacker's rig using a hardware patch
