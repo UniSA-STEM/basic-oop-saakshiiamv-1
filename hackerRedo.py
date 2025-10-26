@@ -82,9 +82,9 @@ class Hacker:
         self.rig.storage.remove(data_spike)
         self.trace_level += 1 # increasing trace level
 
-        print(f"{self.name} launched Data Spike attack at {target.name}.\n"
-              f"New Trace Level: {self.trace_level}")
-        target.take_hit()
+        print(f"\n{self.name} launched Data Spike attack at {target.name}.\n"
+              f"\nNew Trace Level: {self.trace_level}")
+        target.take_hits()
         return True
 
 
