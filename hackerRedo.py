@@ -70,7 +70,7 @@ class Hacker:
         # find data spike from rig storage
         data_spike = None
         for asset in self.rig.storage:
-            if asset.name == "Data Spike" and not asset.encrypted:
+            if asset.name == "Data Spike" and not asset.is_encrypted:
                 data_spike = asset
 
         # data spike found if not returns false
@@ -101,7 +101,7 @@ class Hacker:
         # conditions: drive must exist and not be encrypted
         removable_drive = None
         for asset in self.rig.storage:
-            if asset.name == "Removable Drive" and not asset.encrypted:
+            if asset.name == "Removable Drive" and not asset.is_encrypted:
                 removable_drive = asset
 
         # removable drive found if not returns false
@@ -119,7 +119,7 @@ class Hacker:
         # iterate through original list using [:]
         # only extracts assets that are not encrypted and removes them from the storage
         for asset in target.storage[:]:
-            if not asset.encrypted:
+            if not asset.is_encrypted:
                 target.storage.remove(asset)
 
                 # transfers assets to the hacker's rig storage
@@ -133,7 +133,7 @@ class Hacker:
     def encrypt_asset(self, asset, location):
 
         # checking if the target asset is already encrypted
-        if asset.encrypted:
+        if asset.is_encrypted:
             print(f"{asset.name} is already encrypted.")
             return False
 
@@ -142,7 +142,7 @@ class Hacker:
         security_chip = None
         search_location = self.inventory if location == "inventory" else self.rig.storage
         for item in search_location:
-            if item.name == "Security Chip" and not item.encrypted:
+            if item.name == "Security Chip" and not item.is_encrypted:
                 security_chip = item
 
         # security chip found if not returns False
@@ -152,7 +152,7 @@ class Hacker:
 
         # apply encryption to the target asset
         search_location.remove(security_chip)
-        asset.encrypted = True
+        asset.is_encrypted = True
         print(f"{asset.name} successfully encrypted.")
         return True
 
@@ -160,7 +160,7 @@ class Hacker:
     def decrypt_asset(self, asset, location):
 
         # checking that the target asset is not encrypted
-        if not asset.encrypted:
+        if not asset.is_encrypted:
             print(f"{asset.name} is not encrypted.")
             return False
 
@@ -169,7 +169,7 @@ class Hacker:
         security_chip = None
         search_location = self.inventory if location == "inventory" else self.rig.storage
         for item in search_location:
-            if item.name == "Security Chip" and not item.encrypted:
+            if item.name == "Security Chip" and not item.is_encrypted:
                 security_chip = item
 
         # security chip found if not returns False
@@ -179,7 +179,7 @@ class Hacker:
 
         # apply encryption to the target asset
         search_location.remove(security_chip)
-        asset.encrypted = True
+        asset.is_encrypted = True
         print(f"{asset.name} successfully encrypted.")
         return True
 
@@ -194,7 +194,7 @@ class Hacker:
         # searches inventory for hardware patch
         hardware_patch = None
         for asset in self.inventory:
-            if asset.name == "Hardware Patch" and not asset.encrypted:
+            if asset.name == "Hardware Patch" and not asset.is_encrypted:
                 hardware_patch = asset
 
         # hardware patch found if not returns False
@@ -219,7 +219,7 @@ class Hacker:
         if asset_name:
             asset_storing = None
             for asset in self.inventory:
-                if asset.name == asset_name and not asset.encrypted:
+                if asset.name == asset_name and not asset.is_encrypted:
                     asset_storing = asset
 
             if asset_storing:
@@ -239,7 +239,7 @@ class Hacker:
             # iterate through original list using [:]
             # only extracts assets that are not encrypted and removes them from the storage
             for asset in self.inventory[:]:
-                if not asset.encrypted:
+                if not asset.is_encrypted:
 
                     # transfers assets to the hacker's rig storage
                     if self.rig.store_asset(asset):
@@ -276,7 +276,7 @@ class Hacker:
             # iterate through original list using [:]
             # only extracts assets that are not encrypte
             for asset in self.rig.storage[:]:
-                if not asset.encrypted:
+                if not asset.is_encrypted:
 
                     # release the assets from the rig storage
                     release_asset = self.rig.release(asset.name)
@@ -294,7 +294,7 @@ class Hacker:
 
         # searching for asset in inventory to remove it
         for i, asset in enumerate(self.inventory):
-            if asset.name == asset_name and not asset.encrypted:
+            if asset.name == asset_name and not asset.is_encrypted:
                 asset_found = self.inventory.pop(i)
                 print(f"{asset_name} asset found and removed.")
                 return asset_found
