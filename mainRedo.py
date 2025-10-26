@@ -157,10 +157,40 @@ def test_rig_upgrades():
     print("\nPHASE 5 COMPLETED: Testing Rig Upgrading Component")
     print("\n" + "=" * 85)
 
+def test_storage():
+    print("PHASE 6: Testing Storage")
+    print("=" * 85)
+
+    manager = Hacker("Storage Manager")
+    manager.acquire_rig()
+
+    # add test asset to inventory
+    test_asset = [Asset("Data Spike", "Hacking tool used in battles"),
+                  Asset("Data Spike", "Hacking tool used in battles")]
+    manager.inventory.extend(test_asset)
+
+    print(f"\ntest 6.1: Pre-storage Status")
+    print(f"- Inventory: {[a.name for a in manager.inventory]}")
+    print(f"- Rig Storage: {[a.name for a in manager.rig.storage]}")
+
+    store_res = manager.store_asset(None)
+    print(f"\ntest 6.2: Store to Rig - {"success" if store_res else "failed"}")
+    print(f"- Inventory after: {[a.name for a in manager.inventory]}")
+    print(f"- Rig Storage after: {[a.name for a in manager.rig.storage]}")
+
+    retrieve_res = manager.retrieve_asset(None)
+    print(f"\ntest 6.3: Retrieve from Rig - {"success" if retrieve_res else "failed"}")
+    print(f"- Inventory after: {[a.name for a in manager.inventory]}")
+    print(f"- Rig Storage after: {[a.name for a in manager.rig.storage]}")
+
+    print("\nPHASE 6 COMPLETED: Testing Storage")
+    print("\n" + "=" * 85)
+
 test_combat_trace_system()
 test_asset_extraction()
 test_encrypt_decrypt()
 test_rig_upgrades()
+test_storage()
 
 
 

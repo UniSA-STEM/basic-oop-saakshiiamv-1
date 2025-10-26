@@ -133,7 +133,7 @@ class Rig:
     # or returns none if it is encrypted or not found
     def release_asset(self, asset_name):
         for i, asset in enumerate(self.storage):
-            if asset.name == asset_name and not asset.encrypted:
+            if asset.name == asset_name and not asset.is_encrypted:
                 released_asset = self.storage.pop(i)
                 print(f"{asset_name} has been released from {self.name}.")
                 return released_asset
