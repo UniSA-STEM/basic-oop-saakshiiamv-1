@@ -135,12 +135,32 @@ def test_encrypt_decrypt():
     print("\n"+"="*85)
 
 def test_rig_upgrades():
-    print("\nPHASE 5: Testing Rig Upgrading System")
+    print("\nPHASE 5: Testing Rig Upgrading Component")
+    print("\n" + "=" * 85)
+
+    upgrade = Hacker("Upgrader")
+    upgrade.acquire_rig()
+
+    # add hardware patch
+    hardware_patch = Asset("Hardware Patch", "Component to upgrade rigs")
+    upgrade.inventory.append(hardware_patch)
+
+    print("test 5.1: Pre-upgrade Status")
+    print(f"- Rig Level: {upgrade.rig.upgrade_level}")
+    print(f"- No. of Hardware Patches: {sum(1 for a in upgrade.inventory if a.name == "Hardware Patch")}")
+
+    upgrade_res = upgrade.upgrade_rig()
+    print(f"\ntest 5.2: Upgrade Status - {"Success" if upgrade_res else "Failed"}")
+    print(f"- Rig Level after: {upgrade.rig.upgrade_level}")
+    print(f"- No. of Hardware Patches: {sum(1 for a in upgrade.inventory if a.name == "Hardware Patch")}")
+
+    print("\nPHASE 5 COMPLETED: Testing Rig Upgrading Component")
     print("\n" + "=" * 85)
 
 test_combat_trace_system()
 test_asset_extraction()
 test_encrypt_decrypt()
+test_rig_upgrades()
 
 
 

@@ -45,7 +45,7 @@ class Hacker:
         if rig:
             self.rig = rig
         else:
-            self.rig = Rig(f"Rig belongs to {self.name}.")
+            self.rig = Rig(f"Rig belongs to {self.name}")
 
         print(f"{self.name} has successfully acquired {self.rig.name}!")
         return True
