@@ -250,7 +250,7 @@ class Hacker:
             return store_count > 0
 
     # method to retrieve assets from rig storage to hacker's inventory.
-    def retrieve_asset(self, asset_name):
+    def retrieve_asset(self, asset_name=None):
         # checks if the hacker has a rig to even upgrade
         if not self.rig:
             print(f"{self.name} has no rig.")
@@ -258,7 +258,7 @@ class Hacker:
 
         # retrieve specific asset from rig storage, use the rig's release method to extract the asset
         if asset_name:
-            to_retrieve = self.rig.release(asset_name)
+            to_retrieve = self.rig.release_asset(asset_name)
 
             # if successfully retrieve, adds the retrieved asset to the hacker's inventory
             if to_retrieve:
@@ -272,12 +272,12 @@ class Hacker:
             retrieve_count = 0
 
             # iterate through original list using [:]
-            # only extracts assets that are not encrypte
+            # only extracts assets that are not encrypt
             for asset in self.rig.storage[:]:
                 if not asset.is_encrypted:
 
                     # release the assets from the rig storage
-                    release_asset = self.rig.release(asset.name)
+                    release_asset = self.rig.release_asset(asset.name)
 
                     # add released asset to inventory and increment counter
                     if release_asset:
