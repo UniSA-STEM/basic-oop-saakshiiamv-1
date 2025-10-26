@@ -59,7 +59,7 @@ class Hacker:
             print(f"{self.name} has no rig for launching an attack!")
             return False
 
-        if self.rig.broken:
+        if self.rig.broken_state:
             print(f"Can't attack a broken rig {self.rig.name}!!")
             return False
 
@@ -93,7 +93,7 @@ class Hacker:
 
         # since extraction action can only be performed on a broken system
         # checking if the target has been comprimised
-        if not target.broken:
+        if not target.broken_state:
             print(f"{target.name} can't be extracted, rig is not broken.")
             return False
 

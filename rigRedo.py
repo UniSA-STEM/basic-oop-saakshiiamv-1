@@ -7,7 +7,7 @@ ID: <student_id>
 Username: ambss001
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
-from typing import assert_type
+#from typing import assert_type
 
 from Asset import Asset
 import random
@@ -21,9 +21,10 @@ class Rig:
         self.upgrade_level = 0
 
     # every rig starts with a starting asset of
-
-    # todo
     # append asset from storage
+        self.storage.append(Asset("Data Spike", "Hacking tool used in battles"))
+        self.storage.append(Asset("Data Spike", "Hacking tool used in battles"))
+        self.storage.append(Asset("Removable Drive", "Extraction device found in rigs"))
 
     # takes damage from data spikes attack and increases the damage counter
     # if the damage threshold is reached the rig breaks.
@@ -120,7 +121,7 @@ class Rig:
         max_storage = 3 + self.upgrade_level * 2
 
         if len(self.storage) >= max_storage:
-            print(f"{self.name} storage full, can't store asset: {asset.name}".)
+            print(f"{self.name} storage full, can't store asset: {asset.name}")
             return False
 
         # adding to storage list
@@ -146,7 +147,7 @@ class Rig:
         return None
 
     def __str__(self):
-        condition = self.rigs_condition()
+        condition = self.rig_condition()
         max_storage = 3 + self.upgrade_level * 2
 
         return (f"------------{self.name}------------\n"
@@ -155,4 +156,4 @@ class Rig:
                 f"Stored Assets:    {','.join(asset.name for asset in self.storage) if self.storage
                 else 'empty'}\n"
                 f"Storage:          {len(self.storage)}/{max_storage}\n"
-                f"Damage:           {self.damage}/2")
+                f"Damage:           {self.damage_count}/2")
