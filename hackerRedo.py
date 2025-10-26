@@ -215,7 +215,6 @@ class Hacker:
             print(f"Can't update if {self.name} has no rig.")
             return False
 
-        #
         if asset_name:
             asset_storing = None
             for asset in self.inventory:
@@ -244,7 +243,6 @@ class Hacker:
                     # transfers assets to the hacker's rig storage
                     if self.rig.store_asset(asset):
                         self.inventory.remove(asset)
-                    target.storage.remove(asset)
 
                     store_count += 1
 
