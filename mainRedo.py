@@ -134,6 +134,9 @@ def test_encrypt_decrypt():
     print("\nPHASE 4 TESTS COMPLETED: Encryption & Decryption")
     print("\n"+"="*85)
 
+def test_rig_upgrades():
+    print("\nPHASE 5: Testing Rig Upgrading System")
+    print("\n" + "=" * 85)
 
 test_combat_trace_system()
 test_asset_extraction()

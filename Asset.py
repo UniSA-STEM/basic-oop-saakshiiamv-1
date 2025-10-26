@@ -19,3 +19,4 @@ class Asset:
             return f"{self.name} : {self.description} [encrypted]"
         else:
             return f"{self.name} : {self.description}"
+
