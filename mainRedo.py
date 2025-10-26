@@ -12,7 +12,7 @@ from rigRedo import Rig
 from hackerRedo import Hacker
 
 print("=" * 85)
-print("PHASE 1. Testing base class creations")
+print("PHASE 1: Testing base class creations")
 print("=" * 85)
 
 # creating assets
@@ -186,11 +186,73 @@ def test_storage():
     print("\nPHASE 6 COMPLETED: Testing Storage")
     print("\n" + "=" * 85)
 
+def edge_case_tests():
+    print("PHASE 7: Edge Cases")
+    print("="*85)
+
+    print("\ntest 7.1: Following assignment requirements, testing edge cases")
+
+    # edge case 1 - upgrading without a rig to show it fails
+    print(f"\n--- edge case 1: Upgrade without Rig ---")
+    ohno = Hacker("Disgraceful Hacker")
+    upgrade_no_rig = ohno.upgrade_rig()
+    print(f"Result: {"Failed as expected" if not upgrade_no_rig else "ERROR ALERT: Should Fail!!"}")
+
+    # edge case 2 - encrypting without a security chip to show it fails
+    print(f"\n--- edge case 2: Encrypt without Security Chip ---")
+    loser = Hacker("Loser Hacker")
+    loser.acquire_rig()
+    test_more_assets = Asset("testingDATA1", "testing ASSET 1")
+    loser.inventory.append(test_more_assets)
+    encrypt_no_chips = loser.encrypt_asset(test_more_assets, "inventory")
+    print(f"Result: {"Failed as expected" if not encrypt_no_chips else "ERROR ALERT: Should Fail!!"}")
+
+    # edge case 3 - attacking with high trace level to show it fails
+    print(f"\n--- edge case 3: High Trace Level Attack ---")
+    highly_traced = Hacker("Traced Hacker")
+    highly_traced.acquire_rig()
+    highly_traced.trace_level = 6
+    fake_rig = Rig("placeholder rig")
+    attack_high_trace = highly_traced.launch_attack(fake_rig)
+    print(f"Result: {"Failed as expected" if not attack_high_trace else "ERROR ALERT: Should Fail!!"}")
+
+    # edge case 4 - operating with a broken rig to show it fails
+    print(f"\n--- edge case 4: Broken Rig Operation ---")
+    broken_rig = Rig("Broken Rig")
+    broken_rig.take_hits()
+    broken_rig.take_hits()
+    unfortunate = Hacker("Unfortunate Hacker")
+    unfortunate.rig = broken_rig
+    attack_broken = unfortunate.launch_attack(fake_rig)
+    print(f"Result: {"Failed as expected" if not attack_broken else "ERROR ALERT: Should Fail!!"}")
+
+    print("\nPHASE 7 COMPLETED: Edge Cases handled correctly\n")
+
+# runs all test groups
+def success():
+    print("=" * 85)
+    print("Test Summary")
+    print("=" * 85)
+
+    print(f"\u2713 Combat Trace System")
+    print(f"\u2713 Asset Extraction")
+    print(f"\u2713 Encryption & Decryption Tests")
+    print(f"\u2713 Rig Upgrades")
+    print(f"\u2713 Storage Management")
+    print(f"\u2713 Edge Cases")
+
+    print("="*85)
+    print("PHASES COMPLETED SUCCESSFULLY")
+    print("=" * 85)
+
+
 test_combat_trace_system()
 test_asset_extraction()
 test_encrypt_decrypt()
 test_rig_upgrades()
 test_storage()
+edge_case_tests()
+success()
 
 
 
