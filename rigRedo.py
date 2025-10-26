@@ -40,14 +40,14 @@ class Rig:
 
         damage_threshold = max(2 - self.upgrade_level, 1)
 
-        print(f"{self.name} took a hit! \n Damage: {self.damage_count}/{damage_threshold}")
+        print(f"\n{self.name} took a hit! | Damage: {self.damage_count}/{damage_threshold}")
 
         # checking if rig breaks
         if self.damage_count >= damage_threshold:
 
             # change default
             self.broken_state = True
-            print(f"{self.name} is broken.")
+            print(f"{self.name} is broken.\n")
 
     # repairs the rig using a cryptoToken
 
